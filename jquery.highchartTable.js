@@ -1,7 +1,6 @@
 ;
 
 (function($) {
-  // définition du plugin jQuery
   $.fn.highchartTable = function() {
     
     var allowedGraphTypes = ['column', 'line', 'area', 'spline', 'pie'];
@@ -23,13 +22,13 @@
       var $table = $(table);
       var nbYaxis = 1;
 
-      // Récupération du titre du graphique à partir du caption
+      // Retrieve graph title from the table caption
       var captions   = $('caption', table);
       var graphTitle = captions.length ? $(captions[0]).text() : '';
 
       var graphContainer;
       if ($table.data('graph-container-before') != 1) {
-        // Récupération de la cible d'affichage du graphique
+        // Retrieve where the graph must be displayed from the graph-container attribute
         var graphContainerSelector = $table.data('graph-container');
         if (!graphContainerSelector) {
           throw "graph-container data attribute is mandatory";
@@ -59,7 +58,7 @@
         graphContainer = graphContainer[0];
       }
 
-      // Récupération du type de graphique
+      // Retrieve graph type from graph-type attribute
       var globalGraphType = $table.data('graph-type');
       if (!globalGraphType) {
         throw "graph-type data attribute is mandatory";
@@ -75,7 +74,7 @@
 
       var isGraphInverted = $table.data('graph-inverted') == 1;
 
-      // Récupération des titres des séries de données à afficher sur le graphique
+      // Retrieve series titles
       var ths            = $('thead th', table);
       var columns        = [];
       var vlines         = [];
@@ -254,15 +253,15 @@
       }
 
       var defaultColors = [
-        '#4572A7', //bleu
-        '#AA4643', //rouge
-        '#89A54E', //vert
-        '#80699B', //mauve
-        '#3D96AE', //bleu clair
-        '#DB843D', //orange
-        '#92A8CD', //bleu encore plus clair
-        '#A47D7C', //marron
-        '#B5CA92' //vert clair
+        '#4572A7',
+        '#AA4643',
+        '#89A54E',
+        '#80699B',
+        '#3D96AE',
+        '#DB843D',
+        '#92A8CD',
+        '#A47D7C',
+        '#B5CA92'
       ];
       var colors = [];
 
@@ -272,7 +271,7 @@
         var dataname = 'graph-color-' + (i+1);
         colors.push(typeof $table.data(dataname) != 'undefined' ? $table.data(dataname) : typeof themeColors[i] != 'undefined' ? themeColors[i] : defaultColors[i]);
       }
-      // Configuration de HighChart
+
       var highChartConfig = {
         colors: colors,
         chart: {
@@ -305,7 +304,7 @@
           opposite:               $table.data('graph-xaxis-opposite') == '1',
           showLastLabel:          true,
           tickInterval:           $table.data('graph-xaxis-tick-interval') || null,
-          dateTimeLabelFormats:   { //par défaut on affiche numéro jour mois sur les graphs datetime
+          dateTimeLabelFormats:   { //by default, we display the day and month on the datetime graphs
             second: '%e. %b',
             minute: '%e. %b',
             hour:   '%e. %b',
@@ -384,10 +383,9 @@
           }
       };
 
-      // Affichage du graphique
       new Highcharts.Chart(highChartConfig);
 
-      // Permettre le chaînage par jQuery
+      //for fluent api
       return this;
     });
   };
