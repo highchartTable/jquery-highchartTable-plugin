@@ -1,1 +1,390 @@
-My GitHub Page
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery HighchartsTable plugin, from PMSIpilot</title>
+    <meta name="description" content="jQuery plugin to transform HTML tables into nice Highcharts graphs">
+    <meta name="author" content="PMSIpilot">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/prettify.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+  </head>
+  <body>
+
+    <div class="topbar" data-scrollspy="scrollspy">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#">jQuery HighchartsTable plugin</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#quickstart">Quickstart</a></li>
+            <li><a href="#documentation">Documentation</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h2>Hello, people!</h2>
+        <p>Ever wanted to convert your HTML data tables into fancy graphs using <a href="http://www.highcharts.com/">Highcharts</a> ?</p>
+        <p><a class="btn primary large" href="#about">Learn more &raquo;</a></p>
+      </div>
+
+      <section id="about">
+        <div class="page-header">
+          <h1>About</h1>
+        </div>
+        
+        <div class="row">
+          <div class="span-one-third">
+            <h2>Intro</h2>
+            
+            <p>Here at PMSIpilot we wanted to use <a href="http://www.highcharts.com/">Highcharts</a> graph library but with a way to convert automatically our HTML tables containing data into graphs.</p>
+            <p>So we decided to code a jQuery plugin to make this conversion pacefully. And voila, here we are :)</p>
+            <p><a class="btn large" href="#demo">Wanna see a demo ?</a></p>
+          </div>
+          <div class="span-one-third">
+            <h2>How it works</h2>
+            
+            <p>We use HTML5 data-* attributes to specify how the tables are rendered.</p>
+            <p>Many attributes are available to provide you a way to customize the graph.</p>
+            <p><a class="btn" href="#documentation">Full documentation</a></p>
+         </div>
+          <div class="span-one-third">
+            <h2>Licence</h2>
+            
+            <p>We provide our plugin with an MIT licence.</p>
+            <p><a class="btn" href="http://www.opensource.org/licenses/mit-license.php">View MIT licence</a></p>
+            
+            <h2>Get the code</h2>
+            
+            <p>The plugin is hosted on Github.</p>
+            <p><a class="btn" href="http://github.com/pmsipilot/jquery-highchartTable-plugin">See us on Github</a></p>
+          </div>
+        </div>
+
+        
+      </section>
+      
+      <section id="demo">
+        <div class="page-header">
+          <h1>Demo</h1>
+        </div>
+        
+        <h2>Here are some examples of HTML tables converted into graphs</h2>
+        
+        <h3>First example: columns</h3>
+        <div class="row">
+          
+          <div class="span-one-third">
+            <table class="highchart" data-graph-container=".. .. .highchart-container" data-graph-type="column">
+              <caption>Column example</caption>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Sales</th>
+                  <th>Benefits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>January</td>
+                  <td>8000</td>
+                  <td>2000</td>
+                </tr>
+                <tr>
+                  <td>February</td>
+                  <td>12000</td>
+                  <td>3000</td>
+                </tr>
+                <tr>
+                  <td>March</td>
+                  <td>18000</td>
+                  <td>4000</td>
+                </tr>
+                <tr>
+                  <td>April</td>
+                  <td>2000</td>
+                  <td>-1000</td>
+                </tr>
+                <tr>
+                  <td>May</td>
+                  <td>500</td>
+                  <td>-2500</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <button class="btn danger" data-controls-modal="example1-code" data-backdrop="1">See the code</button>
+          </div>
+          
+          <div class="span-two-third">
+            <div class="highchart-container">
+            </div>
+          </div>
+        </div>
+        
+        <div class="hide modal fade" id="example1-code">
+          <div class="modal-header">
+            <a href="#" class="close">x</a>
+            <h3>Source code</h3>
+          </div>
+          
+          <div class="modal-body">
+            <h4>HTML file</h4>
+<pre class="prettyprint">
+&lt;table class="highchart" 
+  data-graph-container=".. .. .highchart-container" 
+  data-graph-type="column"&gt;
+  &lt;caption&gt;Column example&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Sales&lt;/th&gt;
+      &lt;th&gt;Benefits&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;8000&lt;/td&gt;
+      &lt;td&gt;2000&lt;/td&gt;
+    &lt;/tr&gt;
+  
+  ...
+  
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+            <h4>JS file</h4>
+<pre class="prettyprint">
+$(document).ready(function() {
+  $('table.highchart').highchartTable();
+});
+</pre>
+          </div>
+        </div>
+             
+          
+        <h3>Next example: lines</h3>
+        <div class="row">
+          
+          <div class="span-one-third">
+            <table class="highchart" data-graph-container=".. .. .highchart-container" data-graph-type="line">
+              <caption>Line example</caption>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Sales</th>
+                  <th>Benefits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>January</td>
+                  <td>8000</td>
+                  <td>2000</td>
+                </tr>
+                <tr>
+                  <td>February</td>
+                  <td>12000</td>
+                  <td>3000</td>
+                </tr>
+                <tr>
+                  <td>March</td>
+                  <td>18000</td>
+                  <td>4000</td>
+                </tr>
+                <tr>
+                  <td>April</td>
+                  <td>2000</td>
+                  <td>-1000</td>
+                </tr>
+                <tr>
+                  <td>May</td>
+                  <td>500</td>
+                  <td>-2500</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <button class="btn danger" data-controls-modal="example2-code" data-backdrop="1">See the code</button>
+          </div>
+          
+          <div class="span-two-third">
+            <div class="highchart-container">
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="hide modal fade" id="example2-code">
+          <div class="modal-header">
+            <a href="#" class="close">x</a>
+            <h3>Source code</h3>
+          </div>
+          
+          <div class="modal-body">
+            <h4>HTML file</h4>
+<pre class="prettyprint">
+&lt;table class="highchart" 
+  data-graph-container=".. .. .highchart-container" 
+  data-graph-type="line"&gt;
+  &lt;caption&gt;Column example&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Sales&lt;/th&gt;
+      &lt;th&gt;Benefits&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;8000&lt;/td&gt;
+      &lt;td&gt;2000&lt;/td&gt;
+    &lt;/tr&gt;
+  
+  ...
+  
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+            <h4>JS file</h4>
+<pre class="prettyprint">
+$(document).ready(function() {
+  $('table.highchart').highchartTable();
+});
+</pre>
+          </div>
+        </div>
+          
+        <h3>Next example: mixing render modes</h3>
+        <div class="row">
+          
+          <div class="span-one-third">
+            <table class="highchart" data-graph-container=".. .. .highchart-container" data-graph-type="column">
+              <caption>Column + area example</caption>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Sales</th>
+                  <th data-graph-type="area">Benefits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>January</td>
+                  <td>8000</td>
+                  <td>2000</td>
+                </tr>
+                <tr>
+                  <td>February</td>
+                  <td>12000</td>
+                  <td>3000</td>
+                </tr>
+                <tr>
+                  <td>March</td>
+                  <td>18000</td>
+                  <td>4000</td>
+                </tr>
+                <tr>
+                  <td>April</td>
+                  <td>2000</td>
+                  <td>-1000</td>
+                </tr>
+                <tr>
+                  <td>May</td>
+                  <td>500</td>
+                  <td>-2500</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <button class="btn danger" data-controls-modal="example3-code" data-backdrop="1">See the code</button>
+          </div>
+          
+          <div class="span-two-third">
+            <div class="highchart-container">
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="hide modal fade" id="example3-code">
+          <div class="modal-header">
+            <a href="#" class="close">x</a>
+            <h3>Source code</h3>
+          </div>
+          
+          <div class="modal-body">
+            <h4>HTML file</h4>
+<pre class="prettyprint">
+&lt;table class="highchart"
+  data-graph-container=".. .. .highchart-container"
+  data-graph-type="column"&gt;
+  &lt;caption&gt;Column example&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Sales&lt;/th&gt;
+      &lt;th data-graph-type="area"&gt;Benefits&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;8000&lt;/td&gt;
+      &lt;td&gt;2000&lt;/td&gt;
+    &lt;/tr&gt;
+  
+  ...
+  
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+            <h4>JS file</h4>
+<pre class="prettyprint">
+$(document).ready(function() {
+  $('table.highchart').highchartTable();
+});
+</pre>
+          </div>
+        </div>
+        
+      </section>
+      
+      <section id="quickstart">
+        <div class="page-header">
+          <h1>Quickstart</h1>
+        </div>
+      </section>
+      
+      <section id="documentation">
+        <div class="page-header">
+          <h1>Documentation</h1>
+        </div>
+      </section>
+
+      <footer>
+        <p>&copy; <a href="http://github.com/pmsipilot">PMSIpilot</a> 2011</p>
+      </footer>
+
+    </div> <!-- /container -->
+    
+    <script src="js/jquery.min.js"></script> 
+    <script src="js/prettify.js"></script>
+    <script>$(function () { prettyPrint() })</script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/highcharts.js"></script> 
+    <script src="https://raw.github.com/pmsipilot/jquery-highchartTable-plugin/master/jquery.highcharts.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
