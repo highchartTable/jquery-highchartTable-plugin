@@ -319,8 +319,8 @@
             rotation: $table.data('graph-xaxis-rotation') || 0,
             align:    $table.data('graph-xaxis-align') || 'center'
           },
-          startOnTick: $table.data('graph-xaxis-start-on-tick') != "0",
-          endOnTick:   $table.data('graph-xaxis-end-on-tick') != "0",
+          startOnTick: $table.data('graph-xaxis-start-on-tick'),
+          endOnTick:   $table.data('graph-xaxis-end-on-tick'),
           min: getXAxisMinMax(table, 'min'),
           max: getXAxisMinMax(table, 'max'),
           alternateGridColor: $table.data('graph-xaxis-alternateGridColor') || null,
