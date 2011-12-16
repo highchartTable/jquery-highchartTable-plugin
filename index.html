@@ -367,11 +367,655 @@ $(document).ready(function() {
           <h1>Quickstart</h1>
         </div>
       </section>
-      
+
       <section id="documentation">
         <div class="page-header">
           <h1>Documentation</h1>
         </div>
+
+        <ol>
+          <li><a href="#doc-usage">Usage</a></li>
+          <li><a href="#doc-graph">Graph</a></li>
+          <li><a href="#doc-graph-legend">Legend</a></li>
+          <li><a href="#doc-series">Series</a></li>
+          <li><a href="#doc-lines">Lines</a></li>
+          <li><a href="#doc-axis">Axes</a></li>
+          <li><a href="#doc-points">Points</a></li>
+          <li><a href="#doc-verticallines">Vertical lines</a></li>
+          <li><a href="#doc-pie">Pie charts specific options</a></li>
+        </ol>
+
+
+        <section id="doc-usage">
+
+          <div class="page-header">
+            <h2>1. Usage</h2>
+          </div>
+
+          <p>
+            The HighchartsTable Plugin takes data and attributes from a table and parses them to simply create an Hightcharts chart.
+          </p>
+
+          <p>First you must set some attributes to the table, like the graph type or where to put the graph.</p>
+
+          <p>
+            The series names are defined in the thead, their values are defined in the tbody.<br />
+            The first td of a tr contains the Xaxis value. The other ones contains the value for each series in that x value.
+          </p>
+
+<pre class="prettyprint">
+&lt;table class=&quot;highchart&quot; data-graph-container-before=&quot;1&quot; data-graph-type=&quot;column&quot;&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Month&lt;/th&gt;
+          &lt;th&gt;Sales&lt;/th&gt;
+      &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;January&lt;/td&gt;
+          &lt;td&gt;8000&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;February&lt;/td&gt;
+          &lt;td&gt;12000&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+          Then, simply call highchartTable on a selector that selects the prepared table. Like this :
+
+<pre class="prettyprint">
+$(document).ready(function() {
+  $('table.highchart').highchartTable();
+});
+</pre>
+
+          This will display a column graph before the table of class highchart according to the values defined in its tbody.
+        </section>
+
+
+        <section id="doc-graph">
+
+          <div class="page-header">
+            <h2>2. Graph</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- type -->
+              <tr>
+                <td><strong>data-graph-type</strong></td>
+                <td>table</td>
+                <td>The data-graph-type attribute is required.</td>
+                <td>
+                  <ul>
+                    <li>column</li>
+                    <li>line</li>
+                    <li>area</li>
+                    <li>spline</li>
+                    <li>pie</li>
+                  </ul>
+                </td>
+                <td style="white-space: nowrap;">
+                  <ul>
+                    <li><a href="http://jsfiddle.net/Tm9wP/2/" >Example column</a></li>
+                    <li><a href="http://jsfiddle.net/qupyH/4/" >Example line</a></li>
+                    <li><a href="http://jsfiddle.net/Tm9wP/1/" >Example area</a></li>
+                    <li><a href="http://jsfiddle.net/5Zmrn/" >Example spline</a></li>
+                    <li><a href="http://jsfiddle.net/p347t/" >Example pie</a></li>
+                  </ul>
+                </td>
+              </tr>
+
+              <!-- title -->
+              <tr>
+                <td></td>
+                <td>caption</td>
+                <td>
+                  The chart's main title is defined via the table caption.
+                  <pre class="prettyprint">&lt;table&gt;&lt;caption&gt;this is a title&lt;/caption&gt;&lt;/table&gt;</pre>
+                </td>
+                <td>Any string</td>
+                <td><a href="http://jsfiddle.net/AFBve/1/" >Example</a></td>
+              </tr>
+
+              <!-- subtitle -->
+              <tr>
+                <td><strong>data-graph-subtitle-text</strong></td>
+                <td>table</td>
+                <td>The subtitle is defined via the data-graph-subtitle-text on the table element.</td>
+                <td>Any string</td>
+                <td><a href="http://jsfiddle.net/bvqvK/" >Example</a></td>
+              </tr>
+
+              <!-- Container -->
+              <tr>
+                <td style="white-space: nowrap;">
+                  <strong>data-graph-container-before</strong><br />
+                  <strong>data-graph-container</strong></td>
+                <td>table</td>
+                <td>
+                  There is two ways to defined where the graph must be displayed.<br />
+                  If you want a graph before the table you can use "data-graph-container-before" <br />
+                  otherwise use "data-graph-container" and use a css selector to choose where to display the graph.
+                </td>
+                <td>
+                  For data-graph-container-before : 1<br />
+                  For data-graph-container : a css selector</span>
+                </td>
+                <td>
+                  <a href="http://jsfiddle.net/k7CjC/" >Example with data-graph-container-before</a><br />
+                  <a href="http://jsfiddle.net/PVZ4V/2/" >Example with data-graph-container</a>
+                </td>
+              </tr>
+
+              <!-- Height -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-height</strong></td>
+                <td>table</td>
+                <td>
+                  Height of the graph.
+                </td>
+                <td>Height in px</td>
+                <td><a href="http://jsfiddle.net/fmDya/5/" >Example</a></td>
+              </tr>
+
+              <!-- margin-top -->
+              <tr>
+                <td><strong>data-graph-margin-top</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>Margin in px</td>
+                <td><a href="http://jsfiddle.net/CKFNV/" >Example</a></td>
+              </tr>
+
+              <!-- margin right -->
+              <tr>
+                <td><strong>data-graph-margin-right</strong></td>
+                <td>table</td>
+                <td>
+                </td>
+                <td>Margin in px</td>
+                <td><a href="http://jsfiddle.net/e7LHL/" >Example</a></td>
+              </tr>
+
+              <!-- margin bottom -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-margin-bottom</strong></td>
+                <td>table</td>
+                <td>
+                </td>
+                <td>Margin in px</td>
+                <td><a href="http://jsfiddle.net/bLTMV/" >Example</a></td>
+              </tr>
+
+              <!-- margin left -->
+              <tr>
+                <td><strong>data-graph-margin-left</strong></td>
+                <td>table</td>
+                <td>
+                </td>
+                <td>Margin in px</td>
+                <td><a href="http://jsfiddle.net/ZV5Zn/" >Example</a></td>
+              </tr>
+
+              <!-- Reversed graph -->
+              <tr>
+                <td><strong>data-graph-inverted</strong></td>
+                <td>table</td>
+                <td>Inverts the graph axes.</td>
+                <td>1</td>
+                <td><a href="http://jsfiddle.net/xDZgW/" >Example</a></td>
+              </tr>
+
+              <!-- Opacity -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-area-fillOpacity</strong></td>
+                <td>table</td>
+                <td>Works only on area graphs.</td>
+                <td>Decimal from 0 to 1</td>
+                <td><a href="http://jsfiddle.net/rxyz8/" >Example</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </section>
+
+        <section id="doc-graph-legend">
+
+          <div class="page-header">
+            <h2>3. Legend</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Disable -->
+              <tr>
+                <td><strong>data-graph-legend-disabled</strong></td>
+                <td>table</td>
+                <td>Don't display the legend.</td>
+                <td>1</td>
+                <td><a href="http://jsfiddle.net/ztUQF/" >Example</a></td>
+              </tr>
+
+              <!-- layout -->
+              <tr>
+                <td><strong>data-graph-legend-layout</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>vertical/hortizontal (default : horizontal)</td>
+                <td>
+                  <a href="http://jsfiddle.net/GnFUt/" >Horizontal example </a><br />
+                  <a href="http://jsfiddle.net/VeFHM/" >Vertical example </a>
+                </td>
+              </tr>
+
+              <!-- width -->
+              <tr>
+                <td><strong>data-graph-legend-width</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>width in px</td>
+                <td><a href="http://jsfiddle.net/Vb5NP/" >Example</a></td>
+              </tr>
+
+              <!-- x -->
+              <tr>
+                <td><strong>data-graph-legend-x</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>size in px</td>
+                <td><a href="http://jsfiddle.net/hVpbW/" >Example</a></td>
+              </tr>
+
+              <!-- x -->
+              <tr>
+                <td><strong>data-graph-legend-y</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>size in px</td>
+                <td><a href="http://jsfiddle.net/24h5g/" >Example</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </section>
+
+        <section id="doc-series">
+
+          <div class="page-header">
+            <h2>4. Series</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            <!-- colors -->
+            <tr>
+              <td><strong>data-graph-color-1</strong></td>
+              <td>table</td>
+              <td>From data-graph-color-1 to data-graph-color-9. Where the number is the series index.</td>
+              <td>hexadecimal color</td>
+              <td><a href="http://jsfiddle.net/7fY3J/" >Example</a></td>
+            </tr>
+
+            <!-- hidden -->
+            <tr>
+              <td><strong>data-graph-hidden</strong></td>
+              <td>th</td>
+              <td>Hide the series by default. It could be displayed by clicking on the legend.</td>
+              <td>1</td>
+              <td><a href="http://jsfiddle.net/LGJPR/" >Example</a></td>
+            </tr>
+
+            <!-- dashed series -->
+            <tr>
+              <td style="white-space: nowrap;"><strong>data-graph-dash-style</strong></td>
+              <td>th</td>
+              <td></td>
+              <td>
+                <ul>
+                  <li>dash</li>
+                  <li>dot</li>
+                  <li>longdash</li>
+                  <li>shortdash</li>
+                  <li>shortdot</li>
+                  <li>shortdashdot</li>
+                  <li>shortdashdotdot</li>
+                </ul>
+
+              </td>
+              <td><a href="http://jsfiddle.net/RARQY/" >Example</a></td>
+            </tr>
+
+            </tbody>
+          </table>
+        </section>
+
+        <section id="doc-lines">
+
+          <div class="page-header">
+            <h2>5. Lines</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- width -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-line-width</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>width in px</td>
+                <td><a href="http://jsfiddle.net/4fXku/" >Example</a></td>
+              </tr>
+
+              <!-- width -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-line-shadow</strong></td>
+                <td>table</td>
+                <td>Area graphs has a shadow under the line. To disable it set the value of the data-graph-line-shadow attribute to 0.</td>
+                <td>0</td>
+                <td><a href="http://jsfiddle.net/8jm9x/" >Example</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+
+        <section id="doc-axis">
+
+          <div class="page-header">
+            <h2>6. Axes</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            <!-- xacis title -->
+             <tr>
+               <td style="white-space: nowrap;"><strong>data-graph-xaxis-title-text</strong></td>
+               <td>table</td>
+               <td></td>
+               <td>Any string</td>
+               <td><a href="http://jsfiddle.net/s8g47/" >Example</a></td>
+             </tr>
+
+            <!-- xaxis rotation -->
+             <tr>
+               <td style="white-space: nowrap;"><strong>data-graph-xaxis-rotation</strong></td>
+               <td>table</td>
+               <td>Default : 0</td>
+               <td>Degres</td>
+               <td><a href="http://jsfiddle.net/YD57e/" >Example</a></td>
+             </tr>
+
+            <!-- start on tick -->
+             <tr>
+               <td style="white-space: nowrap;"><strong>data-graph-xaxis-start-on-tick</strong></td>
+               <td>table</td>
+               <td>Remove margin between the line and Y axis.</td>
+               <td>1</td>
+               <td><a href="http://jsfiddle.net/nATZg/" >Example</a></td>
+             </tr>
+
+            <!-- end on tick -->
+             <tr>
+               <td style="white-space: nowrap;"><strong>data-graph-xaxis-end-on-tick</strong></td>
+               <td>table</td>
+               <td>Remove margin between the line and the graph end.</td>
+               <td>1</td>
+               <td><a href="http://jsfiddle.net/2XC9J/" >Example</a></td>
+             </tr>
+
+            <!-- data-graph-yaxis-X-formatter-callback -->
+             <tr>
+               <td style="white-space: nowrap;"><strong>data-graph-yaxis-X-formatter-callback</strong></td>
+               <td>table</td>
+               <td>Callback to format the YAxis values. Where x is the number of the axis (generaly data-graph-yaxis-1-formatter-callback)</td>
+               <td>Name of the function to call</td>
+               <td><a href="http://jsfiddle.net/Uu5eK/" >Example</a></td>
+             </tr>
+
+            <!-- graph-xaxis-min -->
+             <tr>
+               <td style="white-space: nowrap;"><strong>data-graph-xaxis-min</strong></td>
+               <td>table</td>
+               <td>Highcharts detects the minimum values of the X axis, but sometimes it usefull to force this value.</td>
+               <td>Decimal</td>
+               <td><a href="http://jsfiddle.net/a8aR7/" >Example</a></td>
+             </tr>
+
+            <!-- graph-xaxis-max -->
+            <tr>
+              <td style="white-space: nowrap;"><strong>data-graph-xaxis-max</strong></td>
+              <td>table</td>
+              <td>Highcharts detects the maximum values of the X axis, but sometimes it usefull to force this value.</td>
+              <td>Decimal</td>
+              <td><a href="http://jsfiddle.net/k6ARU/" >Example</a></td>
+            </tr>
+
+            <!-- data-graph-yaxis-2-opposite -->
+            <tr>
+              <td style="white-space: nowrap;"><strong>data-graph-yaxis-2-opposite</strong></td>
+              <td>table</td>
+              <td>Move the second Yaxis to the right. You must use data-graph-yaxis to defined witch series is on the second axis.</td>
+              <td>1</td>
+              <td><a href="http://jsfiddle.net/f82XH/" >Example</a></td>
+            </tr>
+
+            <!-- data-graph-yaxis-X-reversed -->
+            <tr>
+              <td style="white-space: nowrap;"><strong>data-graph-yaxis-X-reversed</strong></td>
+              <td>table</td>
+              <td>Higher values are closer to the xAxis.</td>
+              <td>1</td>
+              <td><a href="http://jsfiddle.net/wD8fK/" >Example</a></td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </section>
+
+
+        <section id="doc-points">
+
+          <div class="page-header">
+            <h2>7. Points</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- enable labels -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-datalabels-enabled</strong></td>
+                <td>table</td>
+                <td>Displays values on each point of the graph.</td>
+                <td>1</td>
+                <td><a href="http://jsfiddle.net/jqfK6/" >Example</a></td>
+              </tr>
+
+              <!-- label alignment -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-datalabels-align</strong></td>
+                <td>table</td>
+                <td>Defines where to put the label according to the point position.</td>
+                <td>
+                  <ul>
+                    <li>right</li>
+                    <li>center</li>
+                    <li>left</li>
+                  </ul>
+
+                </td>
+                <td><a href="http://jsfiddle.net/QrMav/" >Example</a></td>
+              </tr>
+
+              <!-- callback -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-point-callback</strong></td>
+                <td>table</td>
+                <td></td>
+                <td>Name of the function to call, the first parameter is an <a href="http://www.highcharts.com/ref/#point-object">Highcharts Point object</a></td>
+                <td><a href="http://jsfiddle.net/EQK9s/" >Example</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+
+
+        <section id="doc-verticallines">
+
+          <div class="page-header">
+            <h2>8. Vertical Lines</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- data-graph-vline-x -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-vline-x</strong></td>
+                <td>th</td>
+                <td>Arbitrary draws a vertical line in the graph. Must be used with the data-graph-vline-height attribute.</td>
+                <td>decimal</td>
+                <td><a href="http://jsfiddle.net/BSgKh/" >Example</a></td>
+              </tr>
+
+              <!-- data-graph-vline-height -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-vline-height</strong></td>
+                <td>th</td>
+                <td>Arbitrary draws a vertical line in the graph. Must be used with the data-graph-vline-x attribute.</td>
+                <td>decimal</td>
+                <td><a href="http://jsfiddle.net/BSgKh/" >Example</a></td>
+              </tr>
+
+              <!-- data-graph-vline-name -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-vline-name</strong></td>
+                <td>th</td>
+                <td>Value displayed on the vertical line tooltip.</td>
+                <td>decimal</td>
+                <td><a href="http://jsfiddle.net/wT5ZK/" >Example</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+
+        <section id="doc-pie">
+
+          <div class="page-header">
+            <h2>9. Pie charts specific options</h2>
+          </div>
+
+          <table class="zebra-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Scope</th>
+                <th>Informations</th>
+                <th>Allowed values</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- data-graph-item-highlight -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-item-highlight</strong></td>
+                <td>td</td>
+                <td>Moves the series outside the chart to be more visible.</td>
+                <td>1</td>
+                <td><a href="http://jsfiddle.net/5YyTV/" >Example</a></td>
+              </tr>
+
+
+              <!-- data-graph-item-color -->
+              <tr>
+                <td style="white-space: nowrap;"><strong>data-graph-item-color</strong></td>
+                <td>td</td>
+                <td></td>
+                <td>hexadecimal color</td>
+                <td><a href="http://jsfiddle.net/AGdaB/" >Example</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+
       </section>
 
       <footer>
@@ -387,6 +1031,7 @@ $(document).ready(function() {
     <script src="js/bootstrap-modal.js"></script>
     <script src="js/highcharts.js"></script> 
     <script src="https://raw.github.com/pmsipilot/jquery-highchartTable-plugin/master/jquery.highchartTable.js"></script>
+    <script src="js/jquery.tablesorter.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
