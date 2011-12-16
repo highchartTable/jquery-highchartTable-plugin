@@ -78,6 +78,7 @@
       var ths            = $('thead th', table);
       var columns        = [];
       var vlines         = [];
+      var skippedColumns = 0;
       var graphIsStacked = false;
       ths.each(function(indexTh, th) {
         var columnScale = $(th).data('graph-value-scale');
@@ -96,35 +97,39 @@
           nbYaxis = 2;
         }
 
+        var isColumnSkipped = $(th).data('graph-skip') == 1;
+        if (isColumnSkipped)
+        {
+          skippedColumns = skippedColumns + 1
+        }
+
+        var object = {
+          libelle:   $(th).text(),
+          skip:      isColumnSkipped,
+          indexTd:   indexTh - skippedColumns - 1,
+          color:     $(th).data('graph-color'),
+          visible:   !$(th).data('graph-hidden'),
+          yAxis:     typeof $(th).data('graph-yaxis') != 'undefined' ? $(th).data('graph-yaxis') : 0,
+          dashStyle: $(th).data('graph-dash-style') || 'solid'
+        };
+
         if (typeof $(th).data('graph-vline-x') == 'undefined') {
-            columns[indexTh] = {
-              libelle:   $(th).text(),
-              scale:     typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1,
-              graphType: serieGraphType,
-              stack:     serieStackGroup,
-              color:     $(th).data('graph-color'),
-              visible:   !$(th).data('graph-hidden'),
-              unit:      $(th).data('graph-unit'),
-              yAxis:     typeof $(th).data('graph-yaxis') != 'undefined' ? $(th).data('graph-yaxis') : 0,
-              dashStyle: $(th).data('graph-dash-style') || 'solid'
-            };
+          object.scale     = typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1;
+          object.graphType = serieGraphType;
+          object.stack     = serieStackGroup;
+          object.unit      = $(th).data('graph-unit');
+          columns[indexTh] = object;
         } else {
-            vlines[indexTh] = {
-              libelle:   $(th).text(),
-              x:         $(th).data('graph-vline-x'),
-              height:    $(th).data('graph-vline-height'),
-              color:     $(th).data('graph-color'),
-              visible:   !$(th).data('graph-hidden'),
-              name:      $(th).data('graph-vline-name'),
-              yAxis:     typeof $(th).data('graph-yaxis') != 'undefined' ? $(th).data('graph-yaxis') : 0,
-              dashStyle: $(th).data('graph-dash-style') || 'solid'
-            };
+          object.x      = $(th).data('graph-vline-x');
+          object.height = $(th).data('graph-vline-height');
+          object.name   = $(th).data('graph-vline-name');
+          vlines[indexTh] = object;
         }
       });
       
       var series = [];
       $(columns).each(function(indexColumn, column) {
-        if(indexColumn!=0) {
+        if(indexColumn!=0 && !column.skip) {
           series.push({
             name:      column.libelle + (column.unit ? ' (' + column.unit + ')' : ''),
             data:      [],
@@ -147,7 +152,7 @@
       });
 
       $(vlines).each(function(indexColumn, vline) {
-        if (typeof vline != 'undefined') {
+        if (typeof vline != 'undefined' && !vline.skip) {
           series.push({
             name:    vline.libelle,
             data:    [{x: vline.x, y:0, name: vline.name}, {x:vline.x, y:vline.height, name: vline.name}],
@@ -171,16 +176,23 @@
         var tds = $('td', row);
         tds.each(function(indexTd, td) {
           var cellValue;
+          var column = columns[indexTd];
+
+          if (column.skip) {
+            return;
+          }
           if (indexTd==0) {
             cellValue = $(td).text();
             xValues.push(cellValue);
           } else {
             var rawCellValue = $(td).text();
+            var serie  = series[column.indexTd];
+
             if (rawCellValue.length==0) {
-              series[indexTd-1].data.push(null);
+              serie.data.push(null);
             } else {
               var cleanedCellValue = rawCellValue.replace(/ /g, '').replace(/,/, '.');
-              cellValue = Math.round(parseFloat(cleanedCellValue) * columns[indexTd].scale * 100) / 100;
+              cellValue = Math.round(parseFloat(cleanedCellValue) * column.scale * 100) / 100;
 
                 var dataGraphX = $(td).data('graph-x');
 
@@ -206,7 +218,7 @@
                   };
                 }
               
-                if (columns[indexTd].graphType === 'pie') {
+                if (column.graphType === 'pie') {
                   if ($(td).data('graph-item-highlight')) {
                     serieDataItem.sliced = 1;
                   }
@@ -216,7 +228,7 @@
                   serieDataItem.color = $(td).data('graph-item-color');
                 }
 
-                series[indexTd-1].data.push(serieDataItem);
+              serie.data.push(serieDataItem);
             }
           }
         });
