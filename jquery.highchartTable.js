@@ -100,7 +100,7 @@
         var isColumnSkipped = $(th).data('graph-skip') == 1;
         if (isColumnSkipped)
         {
-          skippedColumns = skippedColumns + 1
+          skippedColumns = skippedColumns + 1;
         }
 
         var object = {
