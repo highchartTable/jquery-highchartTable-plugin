@@ -103,7 +103,7 @@
           skippedColumns = skippedColumns + 1;
         }
 
-        var object = {
+        var thGraphConfig = {
           libelle:   $(th).text(),
           skip:      isColumnSkipped,
           indexTd:   indexTh - skippedColumns - 1,
@@ -114,16 +114,16 @@
         };
 
         if (typeof $(th).data('graph-vline-x') == 'undefined') {
-          object.scale     = typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1;
-          object.graphType = serieGraphType;
-          object.stack     = serieStackGroup;
-          object.unit      = $(th).data('graph-unit');
-          columns[indexTh] = object;
+          thGraphConfig.scale     = typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1;
+          thGraphConfig.graphType = serieGraphType;
+          thGraphConfig.stack     = serieStackGroup;
+          thGraphConfig.unit      = $(th).data('graph-unit');
+          columns[indexTh]        = thGraphConfig;
         } else {
-          object.x      = $(th).data('graph-vline-x');
-          object.height = $(th).data('graph-vline-height');
-          object.name   = $(th).data('graph-vline-name');
-          vlines[indexTh] = object;
+          thGraphConfig.x      = $(th).data('graph-vline-x');
+          thGraphConfig.height = $(th).data('graph-vline-height');
+          thGraphConfig.name   = $(th).data('graph-vline-name');
+          vlines[indexTh]      = thGraphConfig;
         }
       });
       
