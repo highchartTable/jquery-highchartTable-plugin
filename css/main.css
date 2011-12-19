@@ -3,7 +3,7 @@ section {
 }
 .hero-unit {
   background: #ddd url('../images/logo.png') no-repeat 40px center;
-  padding: 70px 50px 40px 200px;
+  padding: 50px 50px 50px 200px;
   margin: 60px 0 0 0;
 }
 .hero-unit h1 {
@@ -16,4 +16,7 @@ section {
   top: 40px;
   right: 0;
   border: none;
+}
+section section {
+  padding-top: 10px;
 }

@@ -22,7 +22,6 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#demo">Demo</a></li>
-            <li><a href="#quickstart">Quickstart</a></li>
             <li><a href="#documentation">Documentation</a></li>
           </ul>
         </div>
@@ -361,12 +360,6 @@ $(document).ready(function() {
         </div>
         
       </section>
-      
-      <section id="quickstart">
-        <div class="page-header">
-          <h1>Quickstart</h1>
-        </div>
-      </section>
 
       <section id="documentation">
         <div class="page-header">
@@ -399,8 +392,8 @@ $(document).ready(function() {
           <p>First you must set some attributes to the table, like the graph type or where to put the graph.</p>
 
           <p>
-            The series names are defined in the thead, their values are defined in the tbody.<br />
-            The first td of a tr contains the Xaxis value. The other ones contains the value for each series in that x value.
+            The series names are defined in the <code>&lt;thead&gt;</code>, their values are defined in the <code>&lt;tbody&gt;</code>.<br />
+            The first <code>&lt;td&gt;</code> of a <code>&lt;tr&gt;</code> contains the Xaxis value. The other ones contain the values for each series in that x value.
           </p>
 
 <pre class="prettyprint">
@@ -494,7 +487,7 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-subtitle-text</strong></td>
                 <td>table</td>
-                <td>The subtitle is defined via the data-graph-subtitle-text on the table element.</td>
+                <td>Graph subtitle.</td>
                 <td>Any string</td>
                 <td><a href="http://jsfiddle.net/bvqvK/" >Example</a></td>
               </tr>
@@ -506,13 +499,13 @@ $(document).ready(function() {
                   <strong>data-graph-container</strong></td>
                 <td>table</td>
                 <td>
-                  There is two ways to defined where the graph must be displayed.<br />
+                  There are two ways to define where the graph must be rendered.<br />
                   If you want a graph before the table you can use "data-graph-container-before" <br />
-                  otherwise use "data-graph-container" and use a css selector to choose where to display the graph.
+                  otherwise use "data-graph-container" and use a CSS selector to choose where to display the graph.
                 </td>
                 <td>
                   For data-graph-container-before : 1<br />
-                  For data-graph-container : a css selector</span>
+                  For data-graph-container : a CSS selector
                 </td>
                 <td>
                   <a href="http://jsfiddle.net/k7CjC/" >Example with data-graph-container-before</a><br />
@@ -524,9 +517,7 @@ $(document).ready(function() {
               <tr>
                 <td style="white-space: nowrap;"><strong>data-graph-height</strong></td>
                 <td>table</td>
-                <td>
-                  Height of the graph.
-                </td>
+                <td>Graph height.</td>
                 <td>Height in px</td>
                 <td><a href="http://jsfiddle.net/fmDya/5/" >Example</a></td>
               </tr>
@@ -535,7 +526,7 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-margin-top</strong></td>
                 <td>table</td>
-                <td></td>
+                <td>Graph top margin.</td>
                 <td>Margin in px</td>
                 <td><a href="http://jsfiddle.net/CKFNV/" >Example</a></td>
               </tr>
@@ -544,8 +535,7 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-margin-right</strong></td>
                 <td>table</td>
-                <td>
-                </td>
+                <td>Graph right margin.</td>
                 <td>Margin in px</td>
                 <td><a href="http://jsfiddle.net/e7LHL/" >Example</a></td>
               </tr>
@@ -554,8 +544,7 @@ $(document).ready(function() {
               <tr>
                 <td style="white-space: nowrap;"><strong>data-graph-margin-bottom</strong></td>
                 <td>table</td>
-                <td>
-                </td>
+                <td>Graph bottom margin.</td>
                 <td>Margin in px</td>
                 <td><a href="http://jsfiddle.net/bLTMV/" >Example</a></td>
               </tr>
@@ -564,8 +553,7 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-margin-left</strong></td>
                 <td>table</td>
-                <td>
-                </td>
+                <td>Graph left margin.</td>
                 <td>Margin in px</td>
                 <td><a href="http://jsfiddle.net/ZV5Zn/" >Example</a></td>
               </tr>
@@ -615,7 +603,7 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-legend-disabled</strong></td>
                 <td>table</td>
-                <td>Don't display the legend.</td>
+                <td>Disable the legend.</td>
                 <td>1</td>
                 <td><a href="http://jsfiddle.net/ztUQF/" >Example</a></td>
               </tr>
@@ -645,8 +633,8 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-legend-x</strong></td>
                 <td>table</td>
-                <td></td>
-                <td>size in px</td>
+                <td>Legend x offset</td>
+                <td>offset in px</td>
                 <td><a href="http://jsfiddle.net/hVpbW/" >Example</a></td>
               </tr>
 
@@ -654,8 +642,8 @@ $(document).ready(function() {
               <tr>
                 <td><strong>data-graph-legend-y</strong></td>
                 <td>table</td>
-                <td></td>
-                <td>size in px</td>
+                <td>Legend y offset</td>
+                <td>offset in px</td>
                 <td><a href="http://jsfiddle.net/24h5g/" >Example</a></td>
               </tr>
 
@@ -686,7 +674,7 @@ $(document).ready(function() {
             <tr>
               <td><strong>data-graph-color-1</strong></td>
               <td>table</td>
-              <td>From data-graph-color-1 to data-graph-color-9. Where the number is the series index.</td>
+              <td>From data-graph-color-1 to data-graph-color-9. Where the number is the serie index (starting from 1).</td>
               <td>hexadecimal color</td>
               <td><a href="http://jsfiddle.net/7fY3J/" >Example</a></td>
             </tr>
@@ -695,7 +683,7 @@ $(document).ready(function() {
             <tr>
               <td><strong>data-graph-hidden</strong></td>
               <td>th</td>
-              <td>Hide the series by default. It could be displayed by clicking on the legend.</td>
+              <td>Hide the serie by default. It could be displayed by clicking on the legend.</td>
               <td>1</td>
               <td><a href="http://jsfiddle.net/LGJPR/" >Example</a></td>
             </tr>
@@ -704,7 +692,7 @@ $(document).ready(function() {
             <tr>
               <td><strong>data-graph-skip</strong></td>
               <td>th</td>
-              <td>Ignores the column.</td>
+              <td>Ignores the serie.</td>
               <td>1</td>
               <td><a href="http://jsfiddle.net/EYBQY/" >Example</a></td>
             </tr>
@@ -840,7 +828,7 @@ $(document).ready(function() {
              <tr>
                <td style="white-space: nowrap;"><strong>data-graph-xaxis-min</strong></td>
                <td>table</td>
-               <td>Highcharts detects the minimum values of the X axis, but sometimes it usefull to force this value.</td>
+               <td>Highcharts detects the minimum values of the X axis, but sometimes it is usefull to force this value.</td>
                <td>Decimal</td>
                <td><a href="http://jsfiddle.net/a8aR7/" >Example</a></td>
              </tr>
@@ -849,7 +837,7 @@ $(document).ready(function() {
             <tr>
               <td style="white-space: nowrap;"><strong>data-graph-xaxis-max</strong></td>
               <td>table</td>
-              <td>Highcharts detects the maximum values of the X axis, but sometimes it usefull to force this value.</td>
+              <td>Highcharts detects the maximum values of the X axis, but sometimes it is usefull to force this value.</td>
               <td>Decimal</td>
               <td><a href="http://jsfiddle.net/k6ARU/" >Example</a></td>
             </tr>
@@ -858,7 +846,7 @@ $(document).ready(function() {
             <tr>
               <td style="white-space: nowrap;"><strong>data-graph-yaxis-2-opposite</strong></td>
               <td>table</td>
-              <td>Move the second Yaxis to the right. You must use data-graph-yaxis to defined witch series is on the second axis.</td>
+              <td>Move the second Yaxis to the right. You must use data-graph-yaxis to define which serie is on the second axis.</td>
               <td>1</td>
               <td><a href="http://jsfiddle.net/f82XH/" >Example</a></td>
             </tr>
@@ -1006,7 +994,7 @@ $(document).ready(function() {
               <tr>
                 <td style="white-space: nowrap;"><strong>data-graph-item-highlight</strong></td>
                 <td>td</td>
-                <td>Moves the series outside the chart to be more visible.</td>
+                <td>Moves the serie outside the chart to be more visible.</td>
                 <td>1</td>
                 <td><a href="http://jsfiddle.net/5YyTV/" >Example</a></td>
               </tr>
