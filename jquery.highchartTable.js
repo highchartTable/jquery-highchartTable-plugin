@@ -399,9 +399,9 @@
 
       new Highcharts.Chart(highChartConfig);
 
-      //for fluent api
-      return this;
     });
+    //for fluent api
+    return this;
   };
   
   var getXAxisMinMax = function(table, minOrMax) {
