@@ -166,13 +166,16 @@
         }
       });
 
-      var xValues = [];
-      var rows = $('tbody:first tr', table);
+      var xValues         = [];
+      var callablePoint   = getCallable(table, 'graph-point-callback');
+      var isGraphDatetime = $table.data('graph-xaxis-type') == 'datetime';
+      
+      var rows            = $('tbody:first tr', table);
       rows.each(function(indexRow, row) {
         if (!!$(row).data('graph-skip')) {
           return;
         }
-        
+
         var tds = $('td', row);
         tds.each(function(indexTd, td) {
           var cellValue;
@@ -196,20 +199,19 @@
 
                 var dataGraphX = $(td).data('graph-x');
 
-                if ($table.data('graph-xaxis-type') == 'datetime') {
+                if (isGraphDatetime) {
                   dataGraphX    = $('td', $(row)).first().text();
                   var dateInfos = dataGraphX.split('-');
                   var date      = parseDate(dateInfos);
                   dataGraphX    = date.getTime() - date.getTimezoneOffset()*60*1000;
                 }
-                
+
                 var serieDataItem = {
                   name:   typeof $(td).data('graph-name') != 'undefined' ? $(td).data('graph-name') : rawCellValue,
                   y:      cellValue,
                   x:      dataGraphX //undefined if no x defined in table
                 };
-                
-                var callablePoint = getCallable(table, 'graph-point-callback');
+
                 if (callablePoint) {
                   serieDataItem.events = {
                     click: function () {
@@ -217,13 +219,13 @@
                       }
                   };
                 }
-              
+
                 if (column.graphType === 'pie') {
                   if ($(td).data('graph-item-highlight')) {
                     serieDataItem.sliced = 1;
                   }
                 }
-                
+
                 if (typeof $(td).data('graph-item-color') != 'undefined') {
                   serieDataItem.color = $(td).data('graph-item-color');
                 }
