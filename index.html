@@ -386,10 +386,21 @@ $(document).ready(function() {
           </div>
 
           <p>
-            The HighchartsTable Plugin takes data and attributes from a table and parses them to simply create an Hightcharts chart.
+          The HighchartsTable plugin takes data and attributes from a table and parses them to simply create an Hightcharts chart.
           </p>
 
-          <p>First you must set some attributes to the table, like the graph type or where to put the graph.</p>
+          <p>
+          The plugin does not contains <a href="http://www.highcharts.com/">Highcharts</a> or <a href="http://jquery.com/">jQuery</a>,
+           so first of all, you must include them your page.
+          </p>
+
+          <pre class="prettyprint">
+&lt;script src="highcharts.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="jquery.highchartsTable.js" type="text/javascript"&gt;&lt;/script&gt;
+          </pre>
+
+          <p>Then you have to set some attributes to the table, like the graph type or where to render the graph.</p>
 
           <p>
             The series names are defined in the <code>&lt;thead&gt;</code>, their values are defined in the <code>&lt;tbody&gt;</code>.<br />
