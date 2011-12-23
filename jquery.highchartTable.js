@@ -53,7 +53,7 @@
         }
         graphContainer = graphContainer[0];
       } else {
-        $table.before('<div ></div>');
+        $table.before('<div></div>');
         graphContainer = $table.prev();
         graphContainer = graphContainer[0];
       }
@@ -81,48 +81,52 @@
       var skippedColumns = 0;
       var graphIsStacked = false;
       ths.each(function(indexTh, th) {
-        var columnScale = $(th).data('graph-value-scale');
+        var $th = $(th);
+        var columnScale = $th.data('graph-value-scale');
 
-        var serieGraphType = $(th).data('graph-type');
+        var serieGraphType = $th.data('graph-type');
         if($.inArray(serieGraphType, allowedGraphTypes) == -1) {
           serieGraphType = globalGraphType;
         }
 
-        var serieStackGroup = $(th).data('graph-stack-group');
+        var serieStackGroup = $th.data('graph-stack-group');
         if(serieStackGroup) {
           graphIsStacked = true;
         }
 
-        if (typeof $(th).data('graph-yaxis') != 'undefined' && $(th).data('graph-yaxis')  == '1') {
+        var yaxis = $th.data('graph-yaxis');
+
+        if (typeof yaxis != 'undefined' && yaxis == '1') {
           nbYaxis = 2;
         }
 
-        var isColumnSkipped = $(th).data('graph-skip') == 1;
+        var isColumnSkipped = $th.data('graph-skip') == 1;
         if (isColumnSkipped)
         {
           skippedColumns = skippedColumns + 1;
         }
 
         var thGraphConfig = {
-          libelle:   $(th).text(),
+          libelle:   $th.text(),
           skip:      isColumnSkipped,
           indexTd:   indexTh - skippedColumns - 1,
-          color:     $(th).data('graph-color'),
-          visible:   !$(th).data('graph-hidden'),
-          yAxis:     typeof $(th).data('graph-yaxis') != 'undefined' ? $(th).data('graph-yaxis') : 0,
-          dashStyle: $(th).data('graph-dash-style') || 'solid'
+          color:     $th.data('graph-color'),
+          visible:   !$th.data('graph-hidden'),
+          yAxis:     typeof yaxis != 'undefined' ? yaxis : 0,
+          dashStyle: $th.data('graph-dash-style') || 'solid'
         };
 
-        if (typeof $(th).data('graph-vline-x') == 'undefined') {
+        var vlinex = $th.data('graph-vline-x');
+        if (typeof vlinex == 'undefined') {
           thGraphConfig.scale     = typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1;
           thGraphConfig.graphType = serieGraphType;
           thGraphConfig.stack     = serieStackGroup;
-          thGraphConfig.unit      = $(th).data('graph-unit');
+          thGraphConfig.unit      = $th.data('graph-unit');
           columns[indexTh]        = thGraphConfig;
         } else {
-          thGraphConfig.x      = $(th).data('graph-vline-x');
-          thGraphConfig.height = $(th).data('graph-vline-height');
-          thGraphConfig.name   = $(th).data('graph-vline-name');
+          thGraphConfig.x      = vlinex;
+          thGraphConfig.height = $th.data('graph-vline-height');
+          thGraphConfig.name   = $th.data('graph-vline-name');
           vlines[indexTh]      = thGraphConfig;
         }
       });
@@ -145,7 +149,7 @@
             dataLabels: {
               x:       isGraphInverted ? 15 : 0,
               enabled: $table.data('graph-datalabels-enabled') == 1,
-              align:   typeof $table.data('graph-datalabels-align') != 'undefined' ? $table.data('graph-datalabels-align') : 'center'
+              align:   $table.data('graph-datalabels-align') || 'center'
             }
           });
         }
@@ -184,11 +188,12 @@
           if (column.skip) {
             return;
           }
+          var $td = $(td);
           if (indexTd==0) {
-            cellValue = $(td).text();
+            cellValue = $td.text();
             xValues.push(cellValue);
           } else {
-            var rawCellValue = $(td).text();
+            var rawCellValue = $td.text();
             var serie  = series[column.indexTd];
 
             if (rawCellValue.length==0) {
@@ -197,7 +202,7 @@
               var cleanedCellValue = rawCellValue.replace(/ /g, '').replace(/,/, '.');
               cellValue = Math.round(parseFloat(cleanedCellValue) * column.scale * 100) / 100;
 
-                var dataGraphX = $(td).data('graph-x');
+                var dataGraphX = $td.data('graph-x');
 
                 if (isGraphDatetime) {
                   dataGraphX    = $('td', $(row)).first().text();
@@ -206,8 +211,9 @@
                   dataGraphX    = date.getTime() - date.getTimezoneOffset()*60*1000;
                 }
 
+                var tdGraphName = $td.data('graph-name');
                 var serieDataItem = {
-                  name:   typeof $(td).data('graph-name') != 'undefined' ? $(td).data('graph-name') : rawCellValue,
+                  name:   typeof tdGraphName != 'undefined' ? tdGraphName : rawCellValue,
                   y:      cellValue,
                   x:      dataGraphX //undefined if no x defined in table
                 };
@@ -221,13 +227,14 @@
                 }
 
                 if (column.graphType === 'pie') {
-                  if ($(td).data('graph-item-highlight')) {
+                  if ($td.data('graph-item-highlight')) {
                     serieDataItem.sliced = 1;
                   }
                 }
 
-                if (typeof $(td).data('graph-item-color') != 'undefined') {
-                  serieDataItem.color = $(td).data('graph-item-color');
+                var tdGraphItemColor = $td.data('graph-item-color');
+                if (typeof tdGraphItemColor != 'undefined') {
+                  serieDataItem.color =  tdGraphItemColor;
                 }
 
               serie.data.push(serieDataItem);
@@ -280,6 +287,8 @@
       var colors = [];
 
       var themeColors = typeof Highcharts.theme != 'undefined' && typeof Highcharts.theme.colors != 'undefined' ? Highcharts.theme.colors : [];
+      var lineShadow  = $table.data('graph-line-shadow');
+      var lineWidth   = $table.data('graph-line-width') || 2;
 
       for(var i=0; i<9; i++) {
         var dataname = 'graph-color-' + (i+1);
@@ -306,7 +315,7 @@
         },
         legend: {
           enabled:     $table.data('graph-legend-disabled') != '1',
-          layout:      typeof $table.data('graph-legend-layout') != 'undefined' ? $table.data('graph-legend-layout') :  'horizontal',
+          layout:      $table.data('graph-legend-layout') || 'horizontal',
           symbolWidth: $table.data('graph-legend-width') || 30,
           x:           $table.data('graph-legend-x') || 15,
           y:           $table.data('graph-legend-y') || 0
@@ -340,7 +349,7 @@
           title: {
             text: $table.data('graph-xaxis-title-text') || null
           },
-          gridLineWidth:     typeof $table.data('graph-xaxis-gridLine-width') != 'undefined' ? $table.data('graph-xaxis-gridLine-width') : 0,
+          gridLineWidth:     $table.data('graph-xaxis-gridLine-width') || 0,
           gridLineDashStyle: $table.data('graph-xaxis-gridLine-style') || 'ShortDot'
         },
         yAxis: yAxisConfig,
@@ -361,12 +370,12 @@
             dataLabels: {
               enabled: true
             },
-            lineWidth: $table.data('graph-line-width') || 2
+            lineWidth: lineWidth
           },
           area: {
-            lineWidth:   $table.data('graph-line-width') || 2,
-            shadow:      typeof $table.data('graph-line-shadow') != 'undefined' ? $table.data('graph-line-shadow') : true,
-            fillOpacity: typeof $table.data('graph-area-fillOpacity') != 'undefined' ? $table.data('graph-area-fillOpacity') : 0.75
+            lineWidth:   lineWidth,
+            shadow:      typeof lineShadow != 'undefined' ? lineShadow : true,
+            fillOpacity: $table.data('graph-area-fillOpacity') || 0.75
           },
           pie: {
             allowPointSelect: true,
@@ -380,7 +389,7 @@
             animation:       false,
             stickyTracking : false,
             stacking:        graphIsStacked ? stackingType : null,
-            groupPadding:    typeof $table.data('graph-group-padding') != 'undefined' ? $table.data('graph-group-padding') : 0
+            groupPadding:    $table.data('graph-group-padding') || 0
           }
         },
         series: series,
