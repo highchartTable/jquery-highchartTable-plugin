@@ -349,7 +349,7 @@
               if ($table.data('graph-xaxis-type') == 'datetime') {
                 return '<b>'+ this.series.name +'</b><br/>'+  Highcharts.dateFormat('%e. %b', this.x) +' : '+ this.y;
               } else {
-                return '<strong>' + this.series.name + '</strong> : ' + this.point.name;
+                return '<strong>' + this.series.name + '</strong><br />' + xValues[this.point.x] + ' : '  + this.point.name;
               }
             }
         },
