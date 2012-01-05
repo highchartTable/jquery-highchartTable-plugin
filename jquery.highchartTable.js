@@ -295,15 +295,20 @@
         colors.push(typeof $table.data(dataname) != 'undefined' ? $table.data(dataname) : typeof themeColors[i] != 'undefined' ? themeColors[i] : defaultColors[i]);
       }
 
+      var marginTop    = $table.data('graph-margin-top');
+      var marginRight  = $table.data('graph-margin-right');
+      var marginBottom = $table.data('graph-margin-bottom');
+      var marginLeft   = $table.data('graph-margin-left');
+
       var highChartConfig = {
         colors: colors,
         chart: {
           renderTo:     graphContainer,
-          inverted:     isGraphInverted, 
-          marginTop:    $table.data('graph-margin-top'),
-          marginRight:  $table.data('graph-margin-right') || 50,
-          marginBottom: $table.data('graph-margin-bottom') || 70,
-          marginLeft:   $table.data('graph-margin-left') || 80,
+          inverted:     isGraphInverted,
+          marginTop:    typeof marginTop != 'undefined' ? marginTop : null,
+          marginRight:  typeof marginRight != 'undefined' ? marginRight : null,
+          marginBottom: typeof marginBottom != 'undefined' ? marginBottom : null,
+          marginLeft:   typeof marginLeft != 'undefined' ? marginLeft : null,
           spacingTop:   $table.data('graph-spacing-top') || 10,
           height:       $table.data('graph-height') || null
         },
