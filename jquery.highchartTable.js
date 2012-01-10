@@ -299,6 +299,8 @@
       var marginRight  = $table.data('graph-margin-right');
       var marginBottom = $table.data('graph-margin-bottom');
       var marginLeft   = $table.data('graph-margin-left');
+      
+      var xAxisLabelsEnabled = $table.data('graph-xaxis-labels-enabled');
 
       var highChartConfig = {
         colors: colors,
@@ -344,7 +346,8 @@
           labels:
           {
             rotation: $table.data('graph-xaxis-rotation') || 0,
-            align:    $table.data('graph-xaxis-align') || 'center'
+            align:    $table.data('graph-xaxis-align') || 'center', 
+            enabled:  typeof xAxisLabelsEnabled != 'undefined' ? xAxisLabelsEnabled : true 
           },
           startOnTick: $table.data('graph-xaxis-start-on-tick'),
           endOnTick:   $table.data('graph-xaxis-end-on-tick'),
