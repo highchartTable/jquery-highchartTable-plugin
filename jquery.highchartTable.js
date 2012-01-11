@@ -414,6 +414,7 @@
           }
       };
 
+      $table.trigger('highchartTable.beforeRender', highChartConfig);
       new Highcharts.Chart(highChartConfig);
 
     });
