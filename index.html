@@ -387,6 +387,7 @@ $(document).ready(function() {
           <li><a href="#doc-points">Points</a></li>
           <li><a href="#doc-verticallines">Vertical lines</a></li>
           <li><a href="#doc-pie">Pie charts specific options</a></li>
+          <li><a href="#doc-javascript">Dynamic options in javascript</a></li>
         </ol>
 
 
@@ -1033,6 +1034,35 @@ $(document).ready(function() {
 
             </tbody>
           </table>
+        </section>
+
+        <section id="doc-javascript">
+
+          <div class="page-header">
+            <h2>10. Dynamic options in javascript</h2>
+          </div>
+
+          <p>
+            Just before the graph is drawed, a event is trigger, is allows you to change the options that are passed to the Highcharts.Chart function.
+          </p>
+
+          <p>
+            For example, let's says that you want to define the series colors according to the graph container. Instead of doing this on server-side on every chart we have,
+            we will do this on the client side using the <strong>highchartTable.beforeRender</strong> event.<br />
+            The second parmeter contains the objet that will be passed to the Highcharts.Chart function. That's the one you must edit in order to change to apperance of the graph.<br />
+            The documentation about this objet is available in the <a href="http://www.highcharts.com/ref/">Highcharts doc</a>.
+          </p>
+
+          <pre class="prettyprint">
+            $('table.highchart')
+              .bind('highchartTable.beforeRender', function(event, highChartConfig) {
+                highChartConfig.colors = ['#104C4C', '#88CCCC', '#228E8E', '#CCFFFF', '#00CCCC', '#3399CC'];
+              })
+              .highchartTable();
+          </pre>
+
+
+
         </section>
 
       </section>
