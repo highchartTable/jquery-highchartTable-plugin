@@ -387,6 +387,7 @@ $(document).ready(function() {
           <li><a href="#doc-points">Points</a></li>
           <li><a href="#doc-verticallines">Vertical lines</a></li>
           <li><a href="#doc-pie">Pie charts specific options</a></li>
+          <li><a href="#doc-javascript">Dynamic options in javascript</a></li>
         </ol>
 
 
@@ -406,8 +407,8 @@ $(document).ready(function() {
           </p>
 
           <pre class="prettyprint">
-&lt;script src="highcharts.js" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script src="jquery.min.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="highcharts.js" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script src="jquery.highchartsTable.js" type="text/javascript"&gt;&lt;/script&gt;
 </pre>
 
@@ -1042,6 +1043,35 @@ $(document).ready(function() {
 
             </tbody>
           </table>
+        </section>
+
+        <section id="doc-javascript">
+
+          <div class="page-header">
+            <h2>10. Dynamic options in javascript</h2>
+          </div>
+
+          <p>
+            Just before the graph is rendered, an event is triggered, which allows you to change the Highchart chart options.
+          </p>
+
+          <p>
+            For example, let's say that you want to define the colors of your data series according to the graph container. Instead of doing this on server-side on every chart you have,
+            you will do this on the client side using the <strong>highchartTable.beforeRender</strong> jQuery custom event.<br />
+            The second parameter contains the objet that will be passed to the Highcharts.Chart function. That's the one you must modify in order to change the colors of the graph.<br />
+            The documentation about this object is available in the <a href="http://www.highcharts.com/ref/">Highcharts doc</a>.
+          </p>
+
+          <pre class="prettyprint">
+$('table.highchart')
+  .bind('highchartTable.beforeRender', function(event, highChartConfig) {
+    highChartConfig.colors = ['#104C4C', '#88CCCC', '#228E8E', '#CCFFFF', '#00CCCC', '#3399CC'];
+  })
+  .highchartTable();
+          </pre>
+
+
+
         </section>
 
       </section>
