@@ -349,7 +349,7 @@
             align:    $table.data('graph-xaxis-align') || 'center', 
             enabled:  typeof xAxisLabelsEnabled != 'undefined' ? xAxisLabelsEnabled : true,
             style:    {
-              fontSize: $table.data('graph-xaxis-labels-font-size') || '100%'
+              fontSize: $table.data('graph-xaxis-labels-font-size') || '1em'
             }
           },
           startOnTick: $table.data('graph-xaxis-start-on-tick'),
