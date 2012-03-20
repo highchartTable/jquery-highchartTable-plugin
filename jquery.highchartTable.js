@@ -302,6 +302,14 @@
       
       var xAxisLabelsEnabled = $table.data('graph-xaxis-labels-enabled');
 
+      var xAxisLabelStyle = {};
+      var xAxisLabelFontSize = $table.data('graph-xaxis-labels-font-size');
+      
+      if (typeof xAxisLabelFontSize != 'undefined')
+      {
+        xAxisLabelStyle.fontSize = xAxisLabelFontSize; 
+      }
+
       var highChartConfig = {
         colors: colors,
         chart: {
@@ -348,9 +356,7 @@
             rotation: $table.data('graph-xaxis-rotation') || 0,
             align:    $table.data('graph-xaxis-align') || 'center', 
             enabled:  typeof xAxisLabelsEnabled != 'undefined' ? xAxisLabelsEnabled : true,
-            style:    {
-              fontSize: $table.data('graph-xaxis-labels-font-size') || '100%'
-            }
+            style:    xAxisLabelStyle
           },
           startOnTick: $table.data('graph-xaxis-start-on-tick'),
           endOnTick:   $table.data('graph-xaxis-end-on-tick'),
