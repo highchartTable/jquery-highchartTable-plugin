@@ -72,7 +72,8 @@
         stackingType = 'normal';
       }
 
-      var isGraphInverted = $table.data('graph-inverted') == 1;
+      var dataLabelsEnabled = $table.data('graph-datalabels-enabled');
+      var isGraphInverted   = $table.data('graph-inverted') == 1;
 
       // Retrieve series titles
       var ths            = $('thead th', table);
@@ -92,6 +93,11 @@
         var serieStackGroup = $th.data('graph-stack-group');
         if(serieStackGroup) {
           graphIsStacked = true;
+       }
+
+        var serieDataLabelsEnabled = $th.data('graph-datalabels-enabled');
+        if (typeof serieDataLabelsEnabled == 'undefined') {
+          serieDataLabelsEnabled = dataLabelsEnabled;
         }
 
         var yaxis = $th.data('graph-yaxis');
@@ -107,13 +113,16 @@
         }
 
         var thGraphConfig = {
-          libelle:   $th.text(),
-          skip:      isColumnSkipped,
-          indexTd:   indexTh - skippedColumns - 1,
-          color:     $th.data('graph-color'),
-          visible:   !$th.data('graph-hidden'),
-          yAxis:     typeof yaxis != 'undefined' ? yaxis : 0,
-          dashStyle: $th.data('graph-dash-style') || 'solid'
+          libelle:           $th.text(),
+          skip:              isColumnSkipped,
+          indexTd:           indexTh - skippedColumns - 1,
+          color:             $th.data('graph-color'),
+          visible:           !$th.data('graph-hidden'),
+          yAxis:             typeof yaxis != 'undefined' ? yaxis : 0,
+          dashStyle:         $th.data('graph-dash-style') || 'solid',
+          dataLabelsEnabled: serieDataLabelsEnabled == 1,
+          dataLabelsColor:   $th.data('graph-datalabels-color') ||  $table.data('graph-datalabels-color')
+
         };
 
         var vlinex = $th.data('graph-vline-x');
@@ -148,7 +157,8 @@
             },
             dataLabels: {
               x:       isGraphInverted ? 15 : 0,
-              enabled: $table.data('graph-datalabels-enabled') == 1,
+              enabled: column.dataLabelsEnabled,
+              color:   column.dataLabelsColor,
               align:   $table.data('graph-datalabels-align') || 'center'
             }
           });
