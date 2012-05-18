@@ -270,7 +270,10 @@
             rotation: $table.data('graph-yaxis-'+yAxisNum+'-rotation') || 0
           },
           startOnTick: $table.data('graph-yaxis-'+yAxisNum+'-start-on-tick') !== "0",
-          endOnTick:   $table.data('graph-yaxis-'+yAxisNum+'-end-on-tick') !== "0"
+          endOnTick:   $table.data('graph-yaxis-'+yAxisNum+'-end-on-tick') !== "0",
+          stackLabels : {
+            enabled: $table.data('graph-yaxis-'+yAxisNum+'-stacklabels-enabled') == '1'
+          }
         };
 
         var callableYAxisFormatter = getCallable(table, 'graph-yaxis-'+yAxisNum+'-formatter-callback');
