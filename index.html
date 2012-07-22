@@ -738,7 +738,17 @@ $(document).ready(function() {
 
               </td>
               <td><a href="http://jsfiddle.net/RARQY/" >Example</a></td>
-            </tr>
+      	    </tr>
+
+            <!-- graph-stack-group -->
+	    <tr>
+              <td><strong>graph-stack-group</strong></td>
+	      <td>th</td>
+	      <td>Allows to display series on the same column by setting the same data-graph-stack-group value for those series.</td>
+	      <td>Any string</td>
+              <td><a href="http://jsfiddle.net/pRy7h/">Example</a></td>
+	    </tr>
+
 
             </tbody>
           </table>
@@ -905,13 +915,22 @@ $(document).ready(function() {
             </tr>
 
             <!-- data-graph-xaxis-type -->
-             <tr>
+            <tr>
                <td style="white-space: nowrap;"><strong>data-graph-xaxis-type</strong></td>
                <td>table</td>
                <td>Supports only one type : datetime, which displays irregular time data</td>
                <td>datetime</td>
                <td><a href="http://jsfiddle.net/J3pry/" >Example</a></td>
-	     </tr>
+	    </tr>
+
+            <!-- data-graph-yaxis-X-stacklabels-enabled -->
+            <tr>
+              <td style="white-space: nowrap;"><strong>data-graph-yaxis-X-stacklabels-enabled </strong></td>
+              <td>table</td>
+              <td>Displays total on columns when they are stacked with the data-graph-stack-group attribute.</td>
+              <td>1</td>
+              <td><a href="http://jsfiddle.net/DTDwq/" >Example</a></td>
+            </tr>
 
             </tbody>
           </table>
@@ -939,10 +958,10 @@ $(document).ready(function() {
               <!-- enable labels -->
               <tr>
                 <td style="white-space: nowrap;"><strong>data-graph-datalabels-enabled</strong></td>
-                <td>table</td>
-                <td>Displays values on each point of the graph.</td>
-                <td>1</td>
-                <td><a href="http://jsfiddle.net/jqfK6/" >Example</a></td>
+                <td>table<br />th</td>
+                <td>Displays values on each point of the graph. <br />Could be defined for all the chart on the table tag or just for one serie on the th tag. The th tag value overrides the table tag value.</td>
+                <td>1 or 0</td>
+                <td><a href="http://jsfiddle.net/L8x6t/" >Example</a></td>
               </tr>
 
               <!-- label alignment -->
@@ -968,6 +987,15 @@ $(document).ready(function() {
                 <td></td>
                 <td>Name of the function to call, the first parameter is an <a href="http://www.highcharts.com/ref/#point-object">Highcharts Point object</a></td>
                 <td><a href="http://jsfiddle.net/EQK9s/" >Example</a></td>
+              </tr>
+
+              <!-- graph-datalabels-color -->
+              <tr>
+                <td><strong>data-graph-datalabels-color</strong></td>
+                <td>table<br />th</td>
+                <td>Change the datalabel color. <br />Could be defined for all the chart on the table tag or just for one serie on the th tag. The th tag value overrides the table tag value.</td>
+                <td>Any string</td>
+                <td><a href="http://jsfiddle.net/VJwGw/">Example</a></td>
               </tr>
 
             </tbody>
@@ -1059,6 +1087,15 @@ $(document).ready(function() {
                 <td></td>
                 <td>hexadecimal color</td>
                 <td><a href="http://jsfiddle.net/AGdaB/" >Example</a></td>
+              </tr>
+
+              <!-- data-graph-name -->
+              <tr>
+                <td><strong>data-graph-name</strong></td>
+                <td>th</td>
+                <td>Sector's name in a pie chart</td>
+                <td>Any string</td>
+                <td><a href="http://jsfiddle.net/AGdaB/">Example</a></td>
               </tr>
 
             </tbody>
