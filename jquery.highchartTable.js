@@ -143,7 +143,8 @@
       var series = [];
       $(columns).each(function(indexColumn, column) {
         if(indexColumn!=0 && !column.skip) {
-          series.push({
+
+          var serieConfig = {
             name:      column.libelle + (column.unit ? ' (' + column.unit + ')' : ''),
             data:      [],
             type:      column.graphType,
@@ -161,7 +162,17 @@
               color:   column.dataLabelsColor,
               align:   $table.data('graph-datalabels-align') || 'center'
             }
-          });
+          };
+
+          if(column.dataLabelsEnabled) {
+            var callableSerieDataLabelsFormatter = getCallable(table, 'graph-datalabels-formatter');
+            if (callableSerieDataLabelsFormatter) {
+              serieConfig.dataLabels.formatter = function () {
+                return callableSerieDataLabelsFormatter(this.y);
+              };
+            }
+          }
+          series.push(serieConfig);
         }
       });
 
