@@ -1,0 +1,12 @@
+Demo of the data-graph-datalabels-formatter option
+
+---
+ name: Easily format the datalabels on your chart
+ description: Defining a simple callback will allow you to easily format datalabels to fit specific needs.
+ authors:
+   - AILLOUD Maxime
+ resources:
+   - http://highcharts.com/js/testing.js
+   - https://raw.github.com/pmsipilot/jquery-highchartTable-plugin/master/jquery.highchartTable.js
+ normalize_css: no
+ ...
