@@ -128,7 +128,7 @@
         var vlinex = $th.data('graph-vline-x');
         if (typeof vlinex == 'undefined') {
           thGraphConfig.scale     = typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1;
-          thGraphConfig.graphType = serieGraphType;
+          thGraphConfig.graphType = serieGraphType == 'column' && isGraphInverted ? 'bar' : serieGraphType;;
           thGraphConfig.stack     = serieStackGroup;
           thGraphConfig.unit      = $th.data('graph-unit');
           columns[indexTh]        = thGraphConfig;
@@ -157,10 +157,9 @@
                 enabled: false
             },
             dataLabels: {
-              x:       isGraphInverted ? 15 : 0,
               enabled: column.dataLabelsEnabled,
               color:   column.dataLabelsColor,
-              align:   $table.data('graph-datalabels-align') || 'center'
+              align:   $table.data('graph-datalabels-align') || (globalGraphType == 'column' && isGraphInverted == 1 ? undefined : 'center')
             }
           };
 
