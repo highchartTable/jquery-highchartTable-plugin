@@ -217,7 +217,9 @@
             var serie  = series[column.indexTd];
 
             if (rawCellValue.length==0) {
-              serie.data.push(null);
+              if (!isGraphDatetime) {
+                serie.data.push(null);
+              }
             } else {
               var cleanedCellValue = rawCellValue.replace(/ /g, '').replace(/,/, '.');
               cellValue = Math.round(parseFloat(cleanedCellValue) * column.scale * 100) / 100;
