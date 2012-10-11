@@ -128,7 +128,7 @@
         var vlinex = $th.data('graph-vline-x');
         if (typeof vlinex == 'undefined') {
           thGraphConfig.scale     = typeof columnScale != 'undefined' ? parseFloat(columnScale) : 1;
-          thGraphConfig.graphType = serieGraphType == 'column' && isGraphInverted ? 'bar' : serieGraphType;;
+          thGraphConfig.graphType = serieGraphType == 'column' && isGraphInverted ? 'bar' : serieGraphType;
           thGraphConfig.stack     = serieStackGroup;
           thGraphConfig.unit      = $th.data('graph-unit');
           columns[indexTh]        = thGraphConfig;
@@ -283,7 +283,8 @@
           endOnTick:   $table.data('graph-yaxis-'+yAxisNum+'-end-on-tick') !== "0",
           stackLabels : {
             enabled: $table.data('graph-yaxis-'+yAxisNum+'-stacklabels-enabled') == '1'
-          }
+          },
+          gridLineInterpolation: $table.data('graph-yaxis-'+yAxisNum+'-grid-line-interpolation') || null
         };
 
         var callableYAxisFormatter = getCallable(table, 'graph-yaxis-'+yAxisNum+'-formatter-callback');
@@ -344,7 +345,8 @@
           marginLeft:   typeof marginLeft != 'undefined' ? marginLeft : null,
           spacingTop:   $table.data('graph-spacing-top') || 10,
           height:       $table.data('graph-height') || null,
-          zoomType:     $table.data('graph-zoom-type') || null
+          zoomType:     $table.data('graph-zoom-type') || null,
+          polar:        $table.data('graph-polar') ? $table.data('graph-polar') : undefined
         },
         title: {
           text: graphTitle
@@ -364,7 +366,7 @@
           type:                   ($table.data('graph-xaxis-type') == 'datetime') ? 'datetime' :  undefined,
           reversed:               $table.data('graph-xaxis-reversed') == '1',
           opposite:               $table.data('graph-xaxis-opposite') == '1',
-          showLastLabel:          true,
+          showLastLabel:          typeof $table.data('graph-xaxis-show-last-label') != 'undefined' ? $table.data('graph-xaxis-show-last-label') : true,
           tickInterval:           $table.data('graph-xaxis-tick-interval') || null,
           dateTimeLabelFormats:   { //by default, we display the day and month on the datetime graphs
             second: '%e. %b',
@@ -391,7 +393,9 @@
             text: $table.data('graph-xaxis-title-text') || null
           },
           gridLineWidth:     $table.data('graph-xaxis-gridLine-width') || 0,
-          gridLineDashStyle: $table.data('graph-xaxis-gridLine-style') || 'ShortDot'
+          gridLineDashStyle: $table.data('graph-xaxis-gridLine-style') || 'ShortDot',
+          tickmarkPlacement: 'on',
+          lineWidth:         $table.data('graph-xaxis-line-width') || 0
         },
         yAxis: yAxisConfig,
         tooltip: {
