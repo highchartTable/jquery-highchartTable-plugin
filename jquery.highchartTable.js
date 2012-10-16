@@ -346,7 +346,7 @@
           spacingTop:   $table.data('graph-spacing-top') || 10,
           height:       $table.data('graph-height') || null,
           zoomType:     $table.data('graph-zoom-type') || null,
-          polar:        $table.data('graph-polar') ? $table.data('graph-polar') : undefined
+          polar:        $table.data('graph-polar') || null
         },
         title: {
           text: graphTitle
@@ -394,7 +394,7 @@
           },
           gridLineWidth:     $table.data('graph-xaxis-gridLine-width') || 0,
           gridLineDashStyle: $table.data('graph-xaxis-gridLine-style') || 'ShortDot',
-          tickmarkPlacement: 'on',
+          tickmarkPlacement: $table.data('graph-xaxis-tickmark-placement') || 'between',
           lineWidth:         $table.data('graph-xaxis-line-width') || 0
         },
         yAxis: yAxisConfig,
