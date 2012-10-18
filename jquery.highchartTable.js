@@ -217,7 +217,9 @@
             var serie  = series[column.indexTd];
 
             if (rawCellValue.length==0) {
-              serie.data.push(null);
+              if (!isGraphDatetime) {
+                serie.data.push(null);
+              }
             } else {
               var cleanedCellValue = rawCellValue.replace(/ /g, '').replace(/,/, '.');
               cellValue = Math.round(parseFloat(cleanedCellValue) * column.scale * 100) / 100;
@@ -226,8 +228,7 @@
 
                 if (isGraphDatetime) {
                   dataGraphX    = $('td', $(row)).first().text();
-                  var dateInfos = dataGraphX.split('-');
-                  var date      = parseDate(dateInfos);
+                  var date      = parseDate(dataGraphX);
                   dataGraphX    = date.getTime() - date.getTimezoneOffset()*60*1000;
                 }
 
@@ -460,8 +461,7 @@
     var value = $(table).data('graph-xaxis-'+minOrMax);
     if (typeof value != 'undefined') {
       if ($(table).data('graph-xaxis-type') == 'datetime') {
-        var dateInfos = value.split('-');
-        var date      = parseDate(dateInfos);
+        var date      = parseDate(value);
         return date.getTime() - date.getTimezoneOffset()*60*1000;
       }
       return value;
@@ -469,8 +469,18 @@
     return null;
   };
 
-  var parseDate = function(dateInfos) {
-    return new Date(parseInt(dateInfos[0], 10), parseInt(dateInfos[1], 10)-1, parseInt(dateInfos[2], 10));
+  var parseDate = function(datetime) {
+    var calculatedateInfos  = datetime.split(' ');
+    var dateDayInfos        = calculatedateInfos[0].split('-');
+    var min                 = null;
+    var hour                = null;
+    // If hour and minute are available in the datetime string
+    if(calculatedateInfos[1]) {
+      var dateHourInfos = calculatedateInfos[1].split(':');
+      min               =  parseInt(dateHourInfos[0], 10);
+      hour              = parseInt(dateHourInfos[1], 10);
+    }
+    return new Date(parseInt(dateDayInfos[0], 10), parseInt(dateDayInfos[1], 10)-1, parseInt(dateDayInfos[2], 10), min, hour);
   };
   
 })(jQuery);
