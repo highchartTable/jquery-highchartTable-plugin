@@ -432,7 +432,7 @@
             dataLabels: {
               enabled: true
             },
-            showInLegend: 0,
+            showInLegend: $table.data('graph-pie-show-in-legend') == '1',
             size:         '80%'
           },
           series: {
