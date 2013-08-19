@@ -13,7 +13,7 @@ $(document).ready(function() {
               <div class="modal-body">\
                   <iframe\
                     style="width: 100%; height: 500px"\
-                    src="http://jsfiddle.net/' + fiddleId + '/embedded/result,js,html/">\
+                    src="http://jsfiddle.net/' + fiddleId + '/embedded/result,html,js/">\
                   </iframe>\
               </div>\
             </div>';
