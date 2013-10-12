@@ -409,6 +409,7 @@ $(document).ready(function() {
           <li><a href="#doc-verticallines">Vertical lines</a></li>
           <li><a href="#doc-pie">Pie charts specific options</a></li>
           <li><a href="#doc-javascript">Dynamic options in javascript</a></li>
+          <li><a href="#doc-changes">Changes</a></li>
         </ol>
 
 
@@ -1164,6 +1165,30 @@ $('table.highchart')
 
 
         </section>
+
+        <section id="doc-changes">
+
+          <div class="page-header">
+            <h2>11. Changes</h2>
+          </div>
+
+	  <p>
+            In issue <a href="https://github.com/highchartTable/jquery-highchartTable-plugin/issues/8">8</a> we removed the default value for the graph-yaxis-X-title-text attribute. If you were using it, here is an example of how you can get the default value back :
+	  </p>
+
+          <pre class="prettyprint">
+  $('table.highchart')
+  .bind('highchartTable.beforeRender', function(event, highChartConfig) {
+    $.each(highChartConfig.yAxis, function (index, value)   {
+      value.title.text = value.title.text || 'Valeur';
+    });
+  });
+          </pre>
+
+
+        </section>
+
+
 
       </section>
 
