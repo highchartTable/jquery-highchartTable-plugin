@@ -259,7 +259,7 @@
       for (yAxisNum=1 ; yAxisNum <= nbYaxis ; yAxisNum++) {
         var yAxisConfigCurrentAxis = {
           title: {
-            text: typeof $table.data('graph-yaxis-'+yAxisNum+'-title-text') != 'undefined'  ? $table.data('graph-yaxis-'+yAxisNum+'-title-text') : "Valeur"
+            text: typeof $table.data('graph-yaxis-'+yAxisNum+'-title-text') != 'undefined'  ? $table.data('graph-yaxis-'+yAxisNum+'-title-text') : null
           },
           max:          typeof $table.data('graph-yaxis-'+yAxisNum+'-max') != 'undefined' ? $table.data('graph-yaxis-'+yAxisNum+'-max') : null,
           min:          typeof $table.data('graph-yaxis-'+yAxisNum+'-min') != 'undefined' ? $table.data('graph-yaxis-'+yAxisNum+'-min') : null,
