@@ -1,0 +1,29 @@
+{
+  "name": "highchartTable",
+  "version": "1.0.0",
+  "title": "convert HTML tables to HighCharts graphs",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "description": "This plugin provides a simple way to convert HTML data tables to Highcharts graphs.",
+  "keywords": [
+    "highcharts",
+    "chart",
+    "table"
+  ],
+  "bugs": "https://github.com/highchartTable/jquery-highchartTable-plugin/issues",
+  "homepage": "http://highcharttable.org/",
+  "docs": "http://highcharttable.org/#documentation",
+  "download": "http://highcharttable.org/#download",
+  "author": {
+    "name" : "Multiple contributors",
+    "email" : "highcharttable@gmail.com",
+    "url" : "https://github.com/highchartTable/jquery-highchartTable-plugin/graphs/contributors"
+  }
+}
