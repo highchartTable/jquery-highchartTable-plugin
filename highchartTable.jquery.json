@@ -15,7 +15,10 @@
   "keywords": [
     "highcharts",
     "chart",
-    "table"
+    "table",
+    "ui",
+    "graphics",
+    "graphs"
   ],
   "bugs": "https://github.com/highchartTable/jquery-highchartTable-plugin/issues",
   "homepage": "http://highcharttable.org/",
