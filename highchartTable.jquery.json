@@ -1,7 +1,7 @@
 {
   "name": "highchartTable",
   "version": "1.0.0",
-  "title": "convert HTML tables to HighCharts graphs",
+  "title": "highchartTable",
   "licenses": [
     {
       "type": "MIT",
