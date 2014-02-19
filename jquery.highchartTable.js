@@ -221,7 +221,7 @@
                 serie.data.push(null);
               }
             } else {
-              var cleanedCellValue = rawCellValue.replace(/ /g, '').replace(/,/, '.');
+              var cleanedCellValue = rawCellValue.replace(/\s/g, '').replace(/,/, '.');
               cellValue = Math.round(parseFloat(cleanedCellValue) * column.scale * 100) / 100;
 
                 var dataGraphX = $td.data('graph-x');
