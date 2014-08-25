@@ -3,6 +3,7 @@ $(document).ready(function() {
   $("table.zebra-striped").tablesorter({ sortList: [[0, 0]] });
 
     $('a[data-fiddle]').click(function(){
+        ga('send', 'event', 'documentation', 'click', $('td:first', $(this).parents('tr')).text());
         var fiddleId = $(this).data('fiddle');
         $(this).attr('data-controls-modal', 'fiddle-modal-' + fiddleId);
         var content = '<div class="hide modal fade" id="fiddle-modal-' + fiddleId+ '">\
