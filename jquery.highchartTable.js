@@ -315,7 +315,8 @@
       var lineShadow  = $table.data('graph-line-shadow');
       var lineWidth   = $table.data('graph-line-width') || 2;
 
-      for(var i=0; i<9; i++) {
+      var nbOfColors = Math.max(defaultColors.length, themeColors.length);
+      for(var i=0; i < nbOfColors; i++) {
         var dataname = 'graph-color-' + (i+1);
         colors.push(typeof $table.data(dataname) != 'undefined' ? $table.data(dataname) : typeof themeColors[i] != 'undefined' ? themeColors[i] : defaultColors[i]);
       }
