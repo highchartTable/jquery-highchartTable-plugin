@@ -1,6 +1,6 @@
 {
   "name": "highchartTable",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "homepage": "https://github.com/highchartTable/jquery-highchartTable-plugin",
   "description": "This jQuery plugin provides a simple way to convert HTML data tables to Highcharts graphs.",
   "main": "jquery.highchartTable.js",
