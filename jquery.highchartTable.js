@@ -381,8 +381,8 @@
           },
           labels:
           {
-            rotation: $table.data('graph-xaxis-rotation') || 0,
-            align:    $table.data('graph-xaxis-align') || 'center', 
+            rotation: $table.data('graph-xaxis-rotation') || undefined,
+            align:    $table.data('graph-xaxis-align') || undefined, 
             enabled:  typeof xAxisLabelsEnabled != 'undefined' ? xAxisLabelsEnabled : true,
             style:    xAxisLabelStyle
           },
