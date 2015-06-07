@@ -222,7 +222,16 @@
               }
             } else {
               var cleanedCellValue = rawCellValue.replace(/\s/g, '').replace(/,/, '.');
-              cellValue = Math.round(parseFloat(cleanedCellValue) * column.scale * 100) / 100;
+              var eventOptions = {
+                 value: cleanedCellValue,
+                 rawValue: rawCellValue,
+                 td: $td,
+                 tr: $(row),
+                 indexTd: indexTd,
+                 indexTr: indexRow
+               }
+               $table.trigger('highchartTable.cleanValue', eventOptions);
+               cellValue = Math.round(parseFloat(eventOptions.value) * column.scale * 100) / 100;
 
                 var dataGraphX = $td.data('graph-x');
 
