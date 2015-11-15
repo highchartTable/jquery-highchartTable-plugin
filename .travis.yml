@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - '0.11'
+env:
+  global:
+    - secure: G+VyUjYXpYO3djiUL62Vj/0PuQmWpHyyXZtKXW+Df77C45Uc+/G0DQL/YGn4tqc4DeAX5W5myTmfAm2q+B1fkg687HFH5HBHp3/RhY++KcitnLZ+8DlvBCIMuvUjgYdq1+pWr+kXg0OCybyyecqdXgRZ3FNTpatf6PIXC5a8PFA=
+    - secure: boiNPr9oRstsVXgXKqs/XfgWPJDNQYCkGjJ8tnZmGF2SVTCK5fOmwycbDpRk1oAzjwHc6pXoiLvqgRySFBoebpz8rIWEbjmxp06+9sN9bw51Za0RPCM2g+4XEg2yU/bzmEj3ZyI/ZEEpm5AOcxhGSyjyQjWiK8sefUB6WV8YkcI=
+  matrix:
+    - JQUERY_VERSION=1.11.3 HIGHCHARTS_VERSION=2.2.4
+    - JQUERY_VERSION=1.11.1 HIGHCHARTS_VERSION=2.2.4
