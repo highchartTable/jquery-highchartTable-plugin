@@ -29,8 +29,10 @@ describe("Base test", function() {
       '   </tbody>' +
       ' </table>';
 
-      $('#fixture').remove();
-      $('body').append(htmlContent);
+      $('body')
+          .empty()
+          .append(htmlContent)
+      ;
   });
 
 
@@ -48,7 +50,21 @@ describe("Base test", function() {
               expect(highChartConfig.series[0].data[1].name).toBe('12000');
               expect(highChartConfig.series[0].data[1].y).toBe(12000);
               expect(highChartConfig.series[0].data[2].name).toBe('18000');
-              expect(highChartConfig.series[0].data[2].y).toBe(18000);
+              expect(highChartConfig.series[0].data[2].y).toBe(18000)
+              expect(highChartConfig.yAxis[0].reversed).toBe(false);
+
+              expect(highChartConfig.yAxis[0].reversed).toBe(false);
+              expect(highChartConfig.yAxis[0].stackLabels.enabled).toBe(false);
+              expect(highChartConfig.yAxis[0].min).toBeNull();
+              expect(highChartConfig.yAxis[0].max).toBeNull();
+              expect(highChartConfig.yAxis[0].title.text).toBeNull();
+              expect(highChartConfig.yAxis[0].opposite).toBe(false);
+              expect(highChartConfig.yAxis[0].tickInterval).toBe(null);
+              expect(highChartConfig.yAxis[0].labels.rotation).toBe(0);
+              expect(highChartConfig.yAxis[0].gridLineInterpolation).toBeNull();
+              expect(highChartConfig.yAxis[0].startOnTick).toBe(true);
+              expect(highChartConfig.yAxis[0].endOnTick).toBe(true);
+              expect(highChartConfig.yAxis[0].labels.formatter).toBeUndefined();
           })
           .highchartTable()
       ;

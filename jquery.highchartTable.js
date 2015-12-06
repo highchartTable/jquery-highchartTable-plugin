@@ -265,30 +265,44 @@
 
       });
 
+      var getYaxisAttr = function($table, yAxisNum, name) {
+          var oldConvention = $table.data('graph-yaxis-' + yAxisNum + '-' + name);
+          if (typeof oldConvention != 'undefined') {
+              return oldConvention;
+          }
+
+          return $table.data('graph-yaxis' + yAxisNum + '-' + name);
+      };
+
       var yAxisConfig = [];
       var yAxisNum;
       for (yAxisNum=1 ; yAxisNum <= nbYaxis ; yAxisNum++) {
         var yAxisConfigCurrentAxis = {
           title: {
-            text: typeof $table.data('graph-yaxis-'+yAxisNum+'-title-text') != 'undefined'  ? $table.data('graph-yaxis-'+yAxisNum+'-title-text') : null
+            text: typeof getYaxisAttr($table, yAxisNum, 'title-text') != 'undefined'  ? getYaxisAttr($table, yAxisNum, 'title-text') : null
           },
-          max:          typeof $table.data('graph-yaxis-'+yAxisNum+'-max') != 'undefined' ? $table.data('graph-yaxis-'+yAxisNum+'-max') : null,
-          min:          typeof $table.data('graph-yaxis-'+yAxisNum+'-min') != 'undefined' ? $table.data('graph-yaxis-'+yAxisNum+'-min') : null,
-          reversed:     $table.data('graph-yaxis-'+yAxisNum+'-reversed') == '1',
-          opposite:     $table.data('graph-yaxis-'+yAxisNum+'-opposite') == '1',
-          tickInterval: $table.data('graph-yaxis-'+yAxisNum+'-tick-interval') || null,
+          max:          typeof getYaxisAttr($table, yAxisNum, 'max') != 'undefined' ? getYaxisAttr($table, yAxisNum, 'max') : null,
+          min:          typeof getYaxisAttr($table, yAxisNum, 'min') != 'undefined' ? getYaxisAttr($table, yAxisNum, 'min') : null,
+          reversed:     getYaxisAttr($table, yAxisNum, 'reversed') == '1',
+          opposite:     getYaxisAttr($table, yAxisNum, 'opposite') == '1',
+          tickInterval: getYaxisAttr($table, yAxisNum, 'tick-interval') || null,
           labels: {
-            rotation: $table.data('graph-yaxis-'+yAxisNum+'-rotation') || 0
+            rotation: getYaxisAttr($table, yAxisNum, 'rotation') || 0
           },
-          startOnTick: $table.data('graph-yaxis-'+yAxisNum+'-start-on-tick') !== "0",
-          endOnTick:   $table.data('graph-yaxis-'+yAxisNum+'-end-on-tick') !== "0",
+          startOnTick: getYaxisAttr($table, yAxisNum, 'start-on-tick') != "0",
+          endOnTick:   getYaxisAttr($table, yAxisNum, 'end-on-tick') != "0",
           stackLabels : {
-            enabled: $table.data('graph-yaxis-'+yAxisNum+'-stacklabels-enabled') == '1'
+            enabled: getYaxisAttr($table, yAxisNum, 'stacklabels-enabled') == '1'
           },
-          gridLineInterpolation: $table.data('graph-yaxis-'+yAxisNum+'-grid-line-interpolation') || null
+          gridLineInterpolation: getYaxisAttr($table, yAxisNum, 'grid-line-interpolation') || null
         };
 
         var callableYAxisFormatter = getCallable(table, 'graph-yaxis-'+yAxisNum+'-formatter-callback');
+
+        if (!callableYAxisFormatter) {
+            callableYAxisFormatter = getCallable(table, 'graph-yaxis'+yAxisNum+'-formatter-callback');
+        }
+
         if (callableYAxisFormatter) {
           yAxisConfigCurrentAxis.labels.formatter = function () {
               return callableYAxisFormatter(this.value);
