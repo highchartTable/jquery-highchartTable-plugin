@@ -1,6 +1,22 @@
 {
   "name": "highchartTable",
   "version": "1.1.0",
+  "description": "This jQuery plugin provides a simple way to convert HTML data tables to Highcharts graphs.",
+  "author": "highchartTable Development Team (https://github.com/highchartTable/jquery-highchartTable-plugin/graphs/contributors)",
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:highchartTable/jquery-highchartTable-plugin.git"
+  },
+  "keywords": [
+    "highcharts",
+    "chart",
+    "table",
+    "ui",
+    "graphics",
+    "graphs"
+  ],
+  "homepage": "http://highcharttable.org",
+  "license": "MIT",
   "scripts": {
       "test": "./node_modules/karma/bin/karma start  karma.conf-ci.js"
   },
